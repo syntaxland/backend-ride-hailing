@@ -24,7 +24,7 @@ http://127.0.0.1:8000/swagger/
 
 7. Testing 
 
-python manage.py test pricing
+python manage.py test pricing 
 
 <!-- 
 To run this app:
