@@ -5,7 +5,7 @@
 1. Clone the repository  
 
 ```bash 
-git clone https://github.com/syntaxland/backend-ride-hailing.git` 
+git clone https://github.com/syntaxland/backend-ride-hailing.git
 ```
 and cd backend-ride-hailing
 
