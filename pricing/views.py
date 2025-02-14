@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
@@ -39,14 +40,14 @@ class CalculateFareView(APIView):
 
             # Validate input: Ensure distance is provided and is a positive float
             if not distance:
-                return Response({"error": "Distance parameter is required."}, status=400)
+                return Response({"error": "Distance parameter is required."}, status=status.HTTP_400_BAD_REQUEST)
 
             try:
                 distance = float(distance)
                 if distance <= 0:
-                    return Response({"error": "Distance must be greater than zero."}, status=400)
+                    return Response({"error": "Distance must be greater than zero."}, status=status.HTTP_400_BAD_REQUEST)
             except ValueError:
-                return Response({"error": "Invalid distance value. Must be a number."}, status=400)
+                return Response({"error": "Invalid distance value. Must be a number."}, status=status.HTTP_400_BAD_REQUEST)
 
             # Calculate fare using the pricing engine
             fare_data = calculate_fare(distance, traffic_level, demand_level)
@@ -59,8 +60,8 @@ class CalculateFareView(APIView):
                 calculated_fare=fare_data["total_fare"]
             )
 
-            return Response(fare_data, status=200)
+            return Response(fare_data, status=status.HTTP_200_OK) 
 
         except Exception as e:
             # Catch unexpected errors and return an appropriate error message
-            return Response({"error": str(e)}, status=500)
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
